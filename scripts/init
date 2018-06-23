@@ -1,0 +1,8 @@
+#! /bin/bash
+if [ -z ${_COMMON_FUNCTIONS+x} ] ; then
+	_target="/srv/common/functions"
+else
+	_target="${_COMMON_FUNCTIONS}"
+fi
+
+for f in ${_target}/* ; do source $f; done
