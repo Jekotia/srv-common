@@ -1,0 +1,6 @@
+#! /bin/bash
+function _pi_setup_shell () {
+	curl -L https://github.com/Jekotia/.zsh/raw/master/shell-setup.sh | sudo bash -s pi || return 1
+
+	return
+}

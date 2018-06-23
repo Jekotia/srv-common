@@ -1,0 +1,6 @@
+#! /bin/bash
+function _where () {
+	echo "$( cd "$(dirname "$0")" ; pwd -P )" || return 1
+
+	return
+}

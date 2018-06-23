@@ -1,0 +1,11 @@
+#! /bin/bash
+function _puppet() {
+	puppetDebURL="https://apt.puppetlabs.com/puppet5-release-stretch.deb"
+	wget -O /tmp/puppet.deb ${puppetDebURL} || return 1
+	dpkg -i /tmp/puppet.deb || return 1
+	rm -f /tmp/puppet.deb || return 1
+	apt-get update || return 1
+	apt-get install -y puppet || return 1
+
+	return
+}
