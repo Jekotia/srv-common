@@ -1,6 +1,7 @@
 #! /bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source ${DIR}/init
+init="`dirname ${DIR}`/scripts/init"
+source $init
 
 _atlas="/srv/atlas"
 _saturn="/srv/saturn"
