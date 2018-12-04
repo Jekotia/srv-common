@@ -1,0 +1,34 @@
+#! /bin/bash
+function package {
+	isRoot "exit"
+
+	local installCmd=
+	local updateCmd=
+	local upgradeCmd=
+
+	if aptitude --version ; then
+		installCmd=aptitude install -y
+		updateCmd=aptitude update 
+		upgradeCmd=aptitude upgrade -y
+	elif apt --version ; then
+		installCmd=apt install -y
+		updateCmd=apt update 
+		upgradeCmd=apt upgrade -y
+	elif apt-get --version ; then
+		installCmd=apt-get install -y
+		updateCmd=apt-get update 
+		upgradeCmd=apt-get upgrade -y
+	fi
+
+	case $1 in
+		install)
+			installCmd "${@:2}"
+		;;
+		update)
+			updateCmd
+		;;
+		upgrade)
+			upgradeCmd "${@:2}"
+		;;
+	esac
+}

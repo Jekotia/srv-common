@@ -1,8 +1,12 @@
 #! /bin/bash
-if [ -z ${_COMMON_FUNCTIONS+x} ] ; then
-	_target="/srv/common/functions"
-else
-	_target="${_COMMON_FUNCTIONS}"
-fi
+function init_source_loop {
+	for i in ${@}/* ; do
+		if [[ -d $i ]] ; then
+			init_source_loop $i
+		elif [[ -f $i ]] ; then
+			source $i
+		fi
+	done
+}
 
-for f in ${_target}/* ; do source $f; done
+init_source_loop ${_COMMON}/functions

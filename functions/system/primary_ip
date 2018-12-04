@@ -1,0 +1,5 @@
+#! /bin/bash
+function system_primary_ip {
+    # returns the primary IP assigned to eth0
+    echo $(ifconfig eth0 | awk -F: '/inet addr:/ {print $2}' | awk '{ print $1 }')
+}
