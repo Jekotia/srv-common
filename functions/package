@@ -7,9 +7,9 @@ function package {
 	local upgradeCmd=
 
 	if apt-get --version > /dev/null 2>&1 ; then
-		installCmd=apt-get install -y
-		updateCmd=apt-get update
-		upgradeCmd=apt-get upgrade -y
+		installCmd="apt-get install -y"
+		updateCmd="apt-get update"
+		upgradeCmd="apt-get upgrade -y"
 	fi
 
 	case $1 in
