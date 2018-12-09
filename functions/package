@@ -6,15 +6,7 @@ function package {
 	local updateCmd=
 	local upgradeCmd=
 
-	if aptitude --version > /dev/null 2>&1 ; then
-		installCmd=aptitude install -y
-		updateCmd=aptitude update
-		upgradeCmd=aptitude upgrade -y
-	elif apt --version > /dev/null 2>&1 ; then
-		installCmd=apt install -y
-		updateCmd=apt update
-		upgradeCmd=apt upgrade -y
-	elif apt-get --version > /dev/null 2>&1 ; then
+	if apt-get --version > /dev/null 2>&1 ; then
 		installCmd=apt-get install -y
 		updateCmd=apt-get update
 		upgradeCmd=apt-get upgrade -y
@@ -22,13 +14,13 @@ function package {
 
 	case $1 in
 		install)
-			installCmd "${@:2}"
+			${installCmd} "${@:2}"
 		;;
 		update)
-			updateCmd
+			${updateCmd}
 		;;
 		upgrade)
-			upgradeCmd "${@:2}"
+			${upgradeCmd} "${@:2}"
 		;;
 	esac
 }
