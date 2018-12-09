@@ -1,10 +1,10 @@
 #! /bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-init="`dirname ${DIR}`/scripts/init"
+init="`dirname ${DIR}`/init"
 source $init
 
 if [ -z ${_COMMON+x} ]; then
-  $_COMMON=/srv/common
+  _COMMON=/srv/common
 fi
 
 declare -A env=()
