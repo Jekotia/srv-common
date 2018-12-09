@@ -9,4 +9,4 @@ function init_source_loop {
 	done
 }
 
-init_source_loop ${_COMMON}/functions
+init_source_loop /srv/common/functions
