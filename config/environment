@@ -13,7 +13,7 @@ env['_GID']="${env['_UID']}" # GID of primary user
 env['_IP']="$(source ${env['_COMMON']}/functions/system/primary_ip;system_primary_ip)"
 
 env['_SCRIPT_ROOT']="${DIR}" # Root directory for server scripts
-env['_SCRIPT_INIT']="${env['_ROOT']}/init" # Script init file for one-line integration with 'source $_SCRIPT_INIT'
+env['_SCRIPT_INIT']="${env['_COMMON']}/init" # Script init file for one-line integration with 'source $_SCRIPT_INIT'
 env['_SCRIPT_FUNC']="${env['_COMMON']}/functions" # Script functions directory
 env['_SCRIPT_DDNS']="${env['_SCRIPT_ROOT']}/ddns.sh"
 
