@@ -13,7 +13,7 @@ function envAdd {
 		echo "export $1=$2" >> ${targetFile}
 		export $1=$2
 		echo "Added '$1=$2' and export directive to '${targetFile}'"
-		touch ${envList}
+		touch ${env['_PUPPET_ENV']}
 		echo "\$$1 = \"$2\"" >> ${env['_PUPPET_ENV']}
 		echo "Added '\$$1 = \"$2\"' to '${env['_PUPPET_ENV']}'"
 	else
