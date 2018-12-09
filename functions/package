@@ -6,17 +6,17 @@ function package {
 	local updateCmd=
 	local upgradeCmd=
 
-	if aptitude --version ; then
+	if aptitude --version > /dev/null 2>&1 ; then
 		installCmd=aptitude install -y
-		updateCmd=aptitude update 
+		updateCmd=aptitude update
 		upgradeCmd=aptitude upgrade -y
-	elif apt --version ; then
+	elif apt --version > /dev/null 2>&1 ; then
 		installCmd=apt install -y
-		updateCmd=apt update 
+		updateCmd=apt update
 		upgradeCmd=apt upgrade -y
-	elif apt-get --version ; then
+	elif apt-get --version > /dev/null 2>&1 ; then
 		installCmd=apt-get install -y
-		updateCmd=apt-get update 
+		updateCmd=apt-get update
 		upgradeCmd=apt-get upgrade -y
 	fi
 

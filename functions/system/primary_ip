@@ -1,7 +1,7 @@
 #! /bin/bash
 function system_primary_ip {
     # returns the primary IP assigned to eth0
-    if ! ifconfig --version  ; then
+    if ! ifconfig --version > /dev/null 2>&1 ; then
       package install net-tools
     fi
     echo $(ifconfig eth0 | awk -F: '/inet addr:/ {print $2}' | awk '{ print $1 }')
