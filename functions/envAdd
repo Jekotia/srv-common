@@ -8,15 +8,11 @@ function envAdd {
 		echo '# Getting all of my server ENV vars into sudo for script execution' | sudo EDITOR='tee -a' visudo
 		echo 'Defaults	env_keep += "_*"' | sudo EDITOR='tee -a' visudo
 	fi
-	if ! cat ${targetFile} | grep "$1=$2" > /dev/null 2>&1 ; then
-		touch ${targetFile}
-		echo "export $1=$2" >> ${targetFile}
-		export $1=$2
-		echo "Added '$1=$2' and export directive to '${targetFile}'"
-		touch ${env['_PUPPET_ENV']}
-		echo "\$$1 = \"$2\"" >> ${env['_PUPPET_ENV']}
-		echo "Added '\$$1 = \"$2\"' to '${env['_PUPPET_ENV']}'"
-	else
-		echo "Looks like '$1=$2' is already in '$targetFile'"
-	fi
+	touch ${targetFile}
+	echo "export $1=$2" >> ${targetFile}
+	export $1=$2
+	echo "Added '$1=$2' and export directive to '${targetFile}'"
+	touch ${env['_PUPPET_ENV']}
+	echo "\$$1 = \"$2\"" >> ${env['_PUPPET_ENV']}
+	echo "Added '\$$1 = \"$2\"' to '${env['_PUPPET_ENV']}'"
 }
