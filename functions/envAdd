@@ -2,7 +2,7 @@
 
 ## takes variable name followed by value. e.g. _envAdd "_ROOT" "/saturn"
 #puppetEnvFile=/saturn/puppet/envList
-function _envAdd () {
+function envAdd () {
 	local targetFile=/etc/environment
 
 	if ! cat /etc/sudoers | grep "Defaults" | grep "env_keep" | grep "_" > /dev/null 2>&1 ; then
@@ -15,8 +15,8 @@ function _envAdd () {
 		export $1=$2
 		echo "Added '$1=$2' and export directive to '${targetFile}'"
 		touch ${envList}
-		echo "\$$1 = \"$2\"" >> ${envList}
-		echo "Added '\$$1 = \"$2\"' to '${envList}'"
+		echo "\$$1 = \"$2\"" >> ${env['_PUPPET_ENV']}
+		echo "Added '\$$1 = \"$2\"' to '${env['_PUPPET_ENV']}'"
 	else
 		echo "Looks like '$1=$2' is already in '$targetFile'"
 	fi

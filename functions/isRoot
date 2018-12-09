@@ -1,5 +1,5 @@
 #! /bin/bash
-function _isRoot () {
+function isRoot {
 	if [[ `id -u` == "0" ]] ; then
 		return
 	else

@@ -1,6 +1,6 @@
 #! /bin/bash
 source ${_SCRIPT_INIT}
 
-_ddns_update
+ddns_update
 
 exit $?

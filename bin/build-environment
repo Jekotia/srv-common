@@ -1,0 +1,34 @@
+#! /bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+init="`dirname ${DIR}`/scripts/init"
+source $init
+
+if [ -z ${_COMMON+x} ]; then
+  $_COMMON=/srv/common
+fi
+
+declare -A env=()
+
+source /srv/*/config/environment
+#source $_COMMON/config/environment
+#source $_ROOT/config/environment
+
+#rm -f "/srv/common/puppet/manifests/"
+#rm -f "/etc/environment"
+
+for i in "${!env[@]}"
+do
+  key=$i
+  #echo "key  : ${key}"
+  value=${env[$i]}
+  #echo "value: ${value}"
+  #eval ${key}=${value}
+  envAdd "${key}" "${value}"
+done
+
+chown ${_UID}:${_GID} ${_PUPPET_ENVIRONMENT}
+
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#source ${DIR}/functions/envAdd
+#source ${DIR}/functions/isRoot
+#envList="/saturn/puppet/envList"
