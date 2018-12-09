@@ -17,8 +17,8 @@ fi
 #source $_COMMON/config/environment
 #source $_ROOT/config/environment
 
-#rm -f "/srv/common/puppet/manifests/"
-#rm -f "/etc/environment"
+rm -f "${_PUPPET_ENV}"
+rm -f "/etc/environment"
 
 for i in "${!env[@]}"
 do
@@ -30,7 +30,7 @@ do
   envAdd "${key}" "${value}"
 done
 
-chown ${_UID}:${_GID} ${_PUPPET_ENVIRONMENT}
+chown ${_UID}:${_GID} ${_PUPPET_ENV}
 
 #DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #source ${DIR}/functions/envAdd
