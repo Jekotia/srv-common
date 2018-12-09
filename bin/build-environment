@@ -9,7 +9,11 @@ fi
 
 declare -A env=()
 
-source /srv/*/config/environment
+source /srv/common/config/environment
+if [ -f /srv/mercury/config/environment ] ; then
+  source /srv/mercury/config/environment
+fi
+
 #source $_COMMON/config/environment
 #source $_ROOT/config/environment
 
