@@ -1,6 +1,7 @@
 #-# Key directories
 env['_SRV']="/srv"
 env['_COMMON']="${env['_SRV']}/common"
+env['_DOCKERFILES']="${env['_SRV']}/Dockerfiles"
 env['_DATA']="${env['_SRV']}/data" # Location of data directory
 env['_LOGS']="${env['_SRV']}/logs" # Location of logs directory
 
