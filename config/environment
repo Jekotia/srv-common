@@ -5,7 +5,7 @@ env['_DATA']="${env['_SRV']}/data" # Location of data directory
 env['_LOGS']="${env['_SRV']}/logs" # Location of logs directory
 
 #-# Primary user
-env['_USER']="jameli"
+env['_USER']="jekotia"
 env['_GROUP']="${env['_USER']}"
 env['_UID']="1000" # UID of primary user
 env['_GID']="${env['_UID']}" # GID of primary user
