@@ -16,7 +16,7 @@ env['_IP']="$(source ${env['_COMMON']}/functions/system/primary_ip;system_primar
 env['_SCRIPT_ROOT']="${DIR}" # Root directory for server scripts
 env['_SCRIPT_INIT']="${env['_COMMON']}/init" # Script init file for one-line integration with 'source $_SCRIPT_INIT'
 env['_SCRIPT_FUNC']="${env['_COMMON']}/functions" # Script functions directory
-env['_SCRIPT_DDNS']="${env['_SCRIPT_ROOT']}/ddns.sh"
+env['_SCRIPT_DDNS']="${env['_COMMON']}/bin/ddns-update"
 
 env['_SSL_DATA']="${env['_DATA']}/ssl"
 
