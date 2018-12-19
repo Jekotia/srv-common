@@ -17,8 +17,8 @@ fi
 #source $_COMMON/config/environment
 #source $_ROOT/config/environment
 
-rm -f "${_PUPPET_ENV}"
-rm -f "/etc/environment"
+rm -vf "${_PUPPET_ENV}"
+rm -vf "/etc/environment"
 
 for i in "${!env[@]}"
 do
