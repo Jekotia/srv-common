@@ -1,7 +1,13 @@
 #! /bin/bash
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-init="`dirname ${DIR}`/init"
-source $init
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#init="`dirname ${DIR}`/init"
+#source $init
+
+if	[ -z "$FUNC" ] ; then
+	FUNC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../functions/"
+fi
+
+source ${FUNC}init
 
 if [ -z ${_COMMON+x} ]; then
   _COMMON=/srv/common
