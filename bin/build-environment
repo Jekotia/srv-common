@@ -3,11 +3,10 @@
 #init="`dirname ${DIR}`/init"
 #source $init
 
-if	[ -z "$FUNC" ] ; then
-	FUNC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../functions/"
+if	[ -z "$DIR" ] ; then
+	DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../functions/"
+	source ${DIR}init
 fi
-
-source ${FUNC}init
 
 if [ -z ${_COMMON+x} ]; then
   _COMMON=/srv/common
