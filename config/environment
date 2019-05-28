@@ -11,7 +11,7 @@ env['_GROUP']="${env['_USER']}"
 env['_UID']="1000" # UID of primary user
 env['_GID']="${env['_UID']}" # GID of primary user
 
-env['_IP']="$(source ${env['_COMMON']}/functions/system/primary_ip;system_primary_ip)"
+env['_IP']="$(source ${env['_COMMON']}/functions/system/ip/getPublic.sh; system_ip_getPublic)"
 
 env['_SCRIPT_ROOT']="${DIR}" # Root directory for server scripts
 env['_SCRIPT_INIT']="${env['_COMMON']}/init" # Script init file for one-line integration with 'source $_SCRIPT_INIT'

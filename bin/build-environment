@@ -4,8 +4,9 @@
 #source $init
 
 if	[ -z "$DIR" ] ; then
-	DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../functions/"
-	source ${DIR}init
+#	DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../functions/"
+#	source ${DIR}init
+	source /srv/common/init
 fi
 
 if [ -z ${_COMMON+x} ]; then
