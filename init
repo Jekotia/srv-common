@@ -1,8 +1,8 @@
 #! /bin/bash
 #-> RUN MAIN FUNCTIONS INIT
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-source ${DIR}/functions/init
+source "${DIR}/libbash/init"
 
 #-> CHECK FOR A PROJECT FUNCTIONS FOLDER TO RUN THROUGH THE LOADER
-loader "${DIR}/project_functions/"
-
+loader "${DIR}/functions" "0" "*.sh"
+#loader "${DIR}" "0" "*.sh"
