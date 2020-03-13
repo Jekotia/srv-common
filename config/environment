@@ -11,12 +11,12 @@ env['_GROUP']="${env['_USER']}"
 env['_UID']="1000" # UID of primary user
 env['_GID']="${env['_UID']}" # GID of primary user
 
-env['_IP']="$(source ${env['_COMMON']}/functions/system/ip/getPublic.sh; system_ip_getPublic)"
+env['_IP']="$(source ${env['_COMMON']}/functions/system/primary_ip.sh; system_primary_ip)"
 
 env['_SCRIPT_ROOT']="${DIR}" # Root directory for server scripts
 env['_SCRIPT_INIT']="${env['_COMMON']}/init" # Script init file for one-line integration with 'source $_SCRIPT_INIT'
 env['_SCRIPT_FUNC']="${env['_COMMON']}/functions" # Script functions directory
-env['_SCRIPT_DDNS']="${env['_COMMON']}/bin/ddns-update"
+env['_SCRIPT_CFDNS']="${env['_COMMON']}/bin/cfdns-update"
 
 env['_SSL_DATA']="${env['_DATA']}/ssl"
 

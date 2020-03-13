@@ -1,0 +1,89 @@
+#! /bin/bash
+source ${_SCRIPT_INIT}
+
+declare -a dnsrecords
+source "${_ROOT_CONFIG}/cfdns.conf"
+
+# https://gist.github.com/Tras2/cba88201b17d765ec065ccbedfb16d9a
+
+# A bash script to update a Cloudflare DNS A record with the external IP of the source machine
+# Used to provide DDNS service for my home
+# Needs the DNS record pre-creating on Cloudflare
+
+declare ip
+declare zone
+declare zoneid
+
+function _get_ip() {
+	# Get the current external IP address
+	ip=$(curl -s -X GET https://checkip.amazonaws.com)
+
+	errcho "Current IP is $ip"
+}
+
+function _get_zoneid() {
+	zone="${*}" ; shift
+
+	# get the zone id for the requested zone
+	zoneid=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=$zone&status=active" \
+		-H "X-Auth-Email: $cloudflare_auth_email" \
+		-H "X-Auth-Key: $cloudflare_auth_key" \
+		-H "Content-Type: application/json" | jq -r '{"result"}[] | .[0] | .id')
+
+	errcho "Zoneid for $zone is $currentzoneid"
+}
+
+function _update_records() {
+	local	_zone \
+			_name \
+			_dnsrecord \
+			_dnsrecordid
+
+	_zone="${1}" ; shift
+	_name="${1}" ; shift
+	_dnsrecord="${_name}.${_zone}"
+
+	# if here, the dns record needs updating
+	if host ${_name}.${_zone} 1.1.1.1 | grep "has address" | grep "$ip"; then
+		errcho "$_dnsrecord is currently set to $ip; no changes needed"
+		return 0
+	fi
+
+	# get the dns record id
+	_dnsrecordid=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records?type=A&name=$_dnsrecord" \
+		-H "X-Auth-Email: $cloudflare_auth_email" \
+		-H "X-Auth-Key: $cloudflare_auth_key" \
+		-H "Content-Type: application/json" | jq -r '{"result"}[] | .[0] | .id')
+
+	errcho "DNSrecordid for $_dnsrecord is $_dnsrecordid"
+	#return 1
+	# update the record
+	curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$zoneid/dns_records/$_dnsrecordid" \
+		-H "X-Auth-Email: $cloudflare_auth_email" \
+		-H "X-Auth-Key: $cloudflare_auth_key" \
+		-H "Content-Type: application/json" \
+		--data "{\"type\":\"A\",\"name\":\"$_dnsrecord\",\"content\":\"$ip\",\"ttl\":1,\"proxied\":false}" | jq
+}
+
+function _main() {
+	_get_ip
+
+	local zone
+	local name
+
+	for record in ${dnsrecords[@]} ; do
+		IFS='.' read -r -a array <<< "$record"
+
+		zone="${array[1]}.${array[2]}"
+		name="${array[0]}"
+
+		echo $zone
+		_get_zoneid "${zone}"
+
+		echo $name
+		_update_records "${zone}" "${name}"
+	done
+
+}
+
+_main "${dnsrecords[@]}"
